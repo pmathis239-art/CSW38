@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Canvas Clock</title>
+</head>
+<body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+    function drawClock() {
+    
+    //Drawing Clock Face //
+        ctx.beginPath();
+        ctx.arc(250, 250, 200, 0, 2 * Math.PI);
+    // Adding color to clcok face //
+        ctx.fillStyle = "#dbeafe";
+        ctx.fill();
+
+        ctx.strokeStyle = "#1e3a8a";
+        ctx.lineWidth = 8;
+        ctx.stroke();
+
+    // Adding numbers 1-12 to clock
+        ctx.font = "bold 24px Arial";
+        ctx.fillStyle = "#111827";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        for (let num = 1; num <= 12; num++) {
+            let angle = num * Math.PI / 6;
+            let x = 250 + Math.sin(angle) * 165;
+            let y = 250 - Math.cos(angle) * 165;
+
+            ctx.fillText(num, x, y);
+    }
+
+    // Adding my name to clock // 
+        ctx.font = "bold 20px Arial";
+        ctx.fillStyle = "#7c3aed";
+        ctx.textAlign = "center";
+
+        ctx.fillText("PHILLIP MATHIS", 250, 315);
+
+    // Get current time//
+        const now = new Date();
+        
+        let hour = now.getHours();
+        let minute = now.getMinutes();
+        let second = now.getSeconds();
+
+        hour = hour %12;
+
+    // Calculate hand angles
+        let hourAngle =
+            (hour * Math.PI / 6) +
+            (minute * Math.PI / (6 * 60));
+
+        let minuteAngle =
+            (minute * Math.PI / 30) +
+            (second * Math.PI / (30 * 60));
+
+        let secondAngle =
+            second * Math.PI / 30;
+
+    // Added hand colors
+        drawHand(hourAngle, 100, 10, "#dc2626");
+        drawHand(minuteAngle, 145, 7, "#2563eb");
+        drawHand(secondAngle, 165, 3, "#16a34a");
+
+    // Center of clock
+        ctx.beginPath();
+        ctx.arc(250, 250, 8, 0, 2 * Math.PI);
+        ctx.fillStyle = "#111827";
+        ctx.fill();
+        }
+
+    //Adding clock hands//
+    function drawHand(angle, length, width, color) {
+        ctx.beginPath();
+
+        ctx.lineWidth = width;
+        ctx.lineCap = "round";
+        ctx.strokeStyle = color;
+
+        ctx.moveTo(250, 250);
+
+        ctx.lineTo(
+            250 + Math.sin(angle) * length,
+            250 - Math.cos(angle) * length
+        );
+
+        ctx.stroke();
+    }
+
+    // Draw the clock//
+        drawClock();
+    
+    // Update every second//
+        setInterval(drawClock, 1000);
+    </script>
+
+</body>
+</html>
