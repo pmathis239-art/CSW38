@@ -25,13 +25,10 @@ function animateSoldier() {
       frameHeight
    );
 
-   frame++;
-
-   if (frame >= totalFrames) {
-      frame = 0;
-   }
+   frame = (frame + 1) % totalFrames;
 }
 
 soldier.onload = function() {
+   animateSoldier();
    setInterval(animateSoldier, 150);
 };
