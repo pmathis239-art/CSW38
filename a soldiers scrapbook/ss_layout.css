@@ -106,9 +106,3 @@ div.mapInfo {
 a.battleMarkers:hover + div.mapInfo {
    display: block;
 }
-#soldierCanvas {
-   display: block;
-   width: 250px;
-   height: 150px;
-   border: 2px solid red;
-}
