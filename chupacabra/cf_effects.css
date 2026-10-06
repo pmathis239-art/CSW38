@@ -93,10 +93,6 @@ div#cube_right {
 div#cube_top {
    transform: translateY(-200px) rotateX(-90deg);
 }
-
-div#cube_bottom {
-   transform: translateY(200px) rotateX(90deg);
-}
 /* Chupacabra Festival Text Animations */
 
 /* Animate the festival title */
@@ -106,16 +102,18 @@ div#cube_bottom {
 
 @keyframes festivalTitle {
    0%, 100% {
-      transform: scale(1);
-      text-shadow: 0 0 5px #fff;
+      color: #ffffff;
+      text-shadow: 0 0 5px #ffffff;
+      opacity: 1;
    }
 
    50% {
-      transform: scale(1.08);
+      color: #00ffff;
       text-shadow:
-         0 0 10px #fff,
+         0 0 10px #ffffff,
          0 0 20px #00ffff,
          0 0 30px #00ffff;
+      opacity: 0.7;
    }
 }
 
@@ -127,15 +125,21 @@ div#cube_bottom {
 
 @keyframes performerGlow {
    0%, 100% {
+      color: #ffffff;
+      text-shadow: 0 0 5px #ffffff;
       opacity: 0.7;
-      text-shadow: 0 0 5px #fff;
    }
 
    50% {
-      opacity: 1;
+      color: #ffccff;
       text-shadow:
-         0 0 10px #fff,
+         0 0 10px #ffffff,
          0 0 20px #ff00ff,
          0 0 30px #ff00ff;
+      opacity: 1;
    }
+}
+
+div#cube_bottom {
+   transform: translateY(200px) rotateX(90deg);
 }
