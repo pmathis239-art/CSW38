@@ -97,3 +97,50 @@ div#cube_top {
 div#cube_bottom {
    transform: translateY(200px) rotateX(90deg);
 }
+/* Animate the festival title on the bottom face */
+#cube_bottom h1 {
+   animation: festivalTitle 2.5s ease-in-out infinite;
+   transform-origin: center;
+}
+
+/* Glowing/pulsing title animation */
+@keyframes festivalTitle {
+   0%, 100% {
+      transform: scale(1);
+      color: #ffffff;
+      text-shadow:
+         0 0 5px #ffffff,
+         0 0 10px #00ffff;
+   }
+
+   50% {
+      transform: scale(1.08);
+      color: #00ffff;
+      text-shadow:
+         0 0 10px #ffffff,
+         0 0 20px #00ffff,
+         0 0 35px #0088ff;
+   }
+}
+/* Animate the performer lineup on the top face */
+#cube_top p {
+   animation: performerGlow 3s ease-in-out infinite;
+}
+
+/* Glowing performer animation */
+@keyframes performerGlow {
+   0%, 100% {
+      opacity: 0.7;
+      text-shadow:
+         0 0 5px #ffffff,
+         0 0 10px #ff00ff;
+   }
+
+   50% {
+      opacity: 1;
+      text-shadow:
+         0 0 10px #ffffff,
+         0 0 20px #ff00ff,
+         0 0 35px #ff00ff;
+   }
+}
