@@ -169,3 +169,43 @@ to {
 }
 
 }
+/* Image spinning animation */
+
+#cw_image07,
+#cw_image01 {
+transform-origin: center center;
+}
+
+.spin {
+animation: spinImage 4s linear infinite;
+}
+
+@keyframes spinImage {
+from {
+transform: rotate(0deg);
+}
+
+to {
+    transform: rotate(360deg);
+}
+
+}
+
+/* Optional text animation */
+
+#spotlight h1 {
+animation: textGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+from {
+color: #333;
+transform: scale(1);
+}
+
+to {
+    color: #a0522d;
+    transform: scale(1.08);
+}
+
+}
