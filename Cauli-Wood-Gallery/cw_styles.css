@@ -148,3 +148,24 @@ nav#bottom ul {
       display: none;
    }
 }
+/* Cauli-Wood Gallery Animation */
+
+#cw_image07,
+#cw_image01 {
+transform-origin: center center;
+}
+
+.spin {
+animation: spinImage 4s linear infinite;
+}
+
+@keyframes spinImage {
+from {
+transform: rotate(0deg);
+}
+
+to {
+    transform: rotate(360deg);
+}
+
+}
