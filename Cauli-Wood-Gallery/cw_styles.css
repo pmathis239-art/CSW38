@@ -148,7 +148,7 @@ nav#bottom ul {
       display: none;
    }
 }
-/* Cauli-Wood Gallery Animation */
+//* Cauli-Wood Gallery Image Animation */
 
 #cw_image07,
 #cw_image01 {
@@ -165,33 +165,11 @@ transform: rotate(0deg);
 }
 
 to {
-    transform: rotate(360deg);
+transform: rotate(360deg);
+}
 }
 
-}
-/* Image spinning animation */
-
-#cw_image07,
-#cw_image01 {
-transform-origin: center center;
-}
-
-.spin {
-animation: spinImage 4s linear infinite;
-}
-
-@keyframes spinImage {
-from {
-transform: rotate(0deg);
-}
-
-to {
-    transform: rotate(360deg);
-}
-
-}
-
-/* text animation */
+/* Optional Text Animation for Extra Credit */
 
 #spotlight h1 {
 animation: textGlow 2s ease-in-out infinite alternate;
@@ -204,8 +182,7 @@ transform: scale(1);
 }
 
 to {
-    color: #a0522d;
-    transform: scale(1.08);
+color: #a0522d;
+transform: scale(1.08);
 }
-
 }
