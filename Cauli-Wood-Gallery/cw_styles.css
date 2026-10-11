@@ -191,7 +191,7 @@ to {
 
 }
 
-/* Optional text animation */
+/* text animation */
 
 #spotlight h1 {
 animation: textGlow 2s ease-in-out infinite alternate;
