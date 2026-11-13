@@ -264,15 +264,47 @@ function resetGame() {
 
 playAgainBtn.addEventListener("click", resetGame);
 
-// Low-volume synthesized ambient tones. Browsers require a user gesture
-// before audio can begin, so the player controls it with the music button.
+// Low-volume retro arcade background music
 let audioContext = null;
 let masterGain = null;
-let musicNodes = [];
 let musicOn = false;
+let musicTimer = null;
+let noteIndex = 0;
+
+// Retro arcade melody
+const melody = [
+  440, 523.25, 659.25, 523.25,
+  392, 440, 523.25, 659.25,
+  587.33, 523.25, 440, 392,
+  349.23, 392, 440, 523.25
+];
+
+function playArcadeNote(frequency) {
+  const oscillator = audioContext.createOscillator();
+  const noteGain = audioContext.createGain();
+
+  // Square wave creates a classic arcade sound
+  oscillator.type = "square";
+  oscillator.frequency.value = frequency;
+
+  // Keep individual notes quiet
+  noteGain.gain.setValueAtTime(0.12, audioContext.currentTime);
+  noteGain.gain.exponentialRampToValueAtTime(
+    0.001,
+    audioContext.currentTime + 0.20
+  );
+
+  oscillator.connect(noteGain);
+  noteGain.connect(masterGain);
+
+  oscillator.start();
+  oscillator.stop(audioContext.currentTime + 0.20);
+}
 
 function startMusic() {
-  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  const AudioContextClass =
+    window.AudioContext || window.webkitAudioContext;
+
   if (!AudioContextClass) {
     musicToggle.textContent = "MUSIC UNAVAILABLE";
     musicToggle.disabled = true;
@@ -281,37 +313,55 @@ function startMusic() {
 
   if (!audioContext) {
     audioContext = new AudioContextClass();
-    masterGain = audioContext.createGain();
-    masterGain.gain.value = 0.035;
-    masterGain.connect(audioContext.destination);
 
-    [55, 82.41, 110].forEach((frequency, index) => {
-      const oscillator = audioContext.createOscillator();
-      const gain = audioContext.createGain();
-      oscillator.type = index === 1 ? "sine" : "triangle";
-      oscillator.frequency.value = frequency;
-      gain.gain.value = index === 0 ? 0.55 : 0.22;
-      oscillator.connect(gain);
-      gain.connect(masterGain);
-      oscillator.start();
-      musicNodes.push(oscillator);
-    });
+    masterGain = audioContext.createGain();
+
+    // Overall background music volume
+    masterGain.gain.value = 0.035;
+
+    masterGain.connect(audioContext.destination);
   }
 
   audioContext.resume();
+
   musicOn = true;
-  musicToggle.textContent = "♫ MUSIC: ON";
+  noteIndex = 0;
+
+  musicToggle.textContent = "♫ RETRO MUSIC: ON";
   musicToggle.setAttribute("aria-pressed", "true");
+
+  // Play a new note every 250 milliseconds
+  musicTimer = setInterval(() => {
+    playArcadeNote(melody[noteIndex]);
+
+    noteIndex = (noteIndex + 1) % melody.length;
+  }, 250);
 }
 
 function stopMusic() {
-  if (audioContext) audioContext.suspend();
+  if (musicTimer) {
+    clearInterval(musicTimer);
+    musicTimer = null;
+  }
+
+  if (audioContext) {
+    audioContext.suspend();
+  }
+
   musicOn = false;
-  musicToggle.textContent = "♫ MUSIC: OFF";
+
+  musicToggle.textContent = "♫ RETRO MUSIC: OFF";
   musicToggle.setAttribute("aria-pressed", "false");
 }
 
+// Music on/off button
 musicToggle.addEventListener("click", () => {
+  if (musicOn) {
+    stopMusic();
+  } else {
+    startMusic();
+  }
+});
   if (musicOn) stopMusic();
   else startMusic();
 });
