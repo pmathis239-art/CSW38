@@ -1,0 +1,254 @@
+/* Space Defender — visual design and responsive layout */
+:root {
+  color-scheme: dark;
+  --cyan: #53ffe1;
+  --blue: #73baff;
+  --pink: #ff4e91;
+  --panel: rgba(7, 14, 37, 0.88);
+  --muted: #b9c9e8;
+}
+
+* { box-sizing: border-box; }
+
+html { min-height: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 28px 16px;
+  display: grid;
+  place-items: center;
+  overflow-x: hidden;
+  color: #f3f7ff;
+  font-family: "Courier New", Courier, monospace;
+  background:
+    radial-gradient(ellipse at 15% 15%, rgba(34, 70, 145, .35), transparent 35%),
+    radial-gradient(ellipse at 85% 75%, rgba(92, 25, 115, .28), transparent 38%),
+    radial-gradient(circle at 50% 50%, #111a3a 0%, #070d20 48%, #02040d 100%);
+  position: relative;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: -30%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::before {
+  opacity: .55;
+  background-image:
+    radial-gradient(2px 2px at 10% 20%, #fff, transparent),
+    radial-gradient(1px 1px at 30% 70%, #9ceaff, transparent),
+    radial-gradient(2px 2px at 65% 30%, #fff, transparent),
+    radial-gradient(1px 1px at 85% 80%, #fff, transparent),
+    radial-gradient(1px 1px at 45% 45%, #9ceaff, transparent);
+  background-size: 260px 240px;
+  animation: starDrift 55s linear infinite;
+}
+
+body::after {
+  inset: 0;
+  opacity: .13;
+  background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(83,255,225,.18) 4px);
+  animation: scan 8s linear infinite;
+}
+
+.page-shell {
+  width: min(900px, 100%);
+  margin: auto;
+  text-align: center;
+}
+
+.site-header { margin-bottom: 20px; }
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--blue);
+  font-size: .72rem;
+  letter-spacing: .2em;
+}
+
+h1 {
+  margin: 0;
+  color: var(--cyan);
+  font-size: clamp(2rem, 7vw, 3.5rem);
+  letter-spacing: .09em;
+  text-shadow: 0 0 8px rgba(83,255,225,.85), 0 0 28px rgba(83,255,225,.35);
+  animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+.author {
+  margin: 7px 0 12px;
+  color: #fff;
+  font-size: 1rem;
+  letter-spacing: .08em;
+}
+
+.author strong { color: var(--pink); }
+
+.intro {
+  max-width: 690px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-family: Arial, sans-serif;
+  font-size: .98rem;
+  line-height: 1.55;
+}
+
+.game-panel {
+  padding: clamp(12px, 3vw, 22px);
+  border: 1px solid rgba(83,255,225,.48);
+  border-radius: 18px;
+  background: var(--panel);
+  box-shadow: 0 0 22px rgba(0, 225, 205, .12), 0 18px 65px rgba(0,0,0,.4);
+  backdrop-filter: blur(8px);
+}
+
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 auto 12px;
+  max-width: 540px;
+  color: var(--muted);
+  font-size: clamp(.72rem, 2.5vw, .95rem);
+  letter-spacing: .08em;
+}
+
+.status-item span {
+  display: inline-block;
+  margin-left: 5px;
+  color: var(--cyan);
+  font-weight: bold;
+}
+
+#missionStatus { color: #ffd36a; }
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  max-width: 540px;
+  height: auto;
+  margin: 0 auto;
+  border: 2px solid var(--cyan);
+  border-radius: 8px;
+  background: radial-gradient(ellipse at center, #17244c 0%, #080d20 72%, #030611 100%);
+  box-shadow: 0 0 18px rgba(83,255,225,.25), inset 0 0 24px rgba(83,255,225,.08);
+  touch-action: none;
+}
+
+.game-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.action-button, .control-button {
+  border: 1px solid var(--cyan);
+  border-radius: 8px;
+  color: var(--cyan);
+  background: linear-gradient(135deg, rgba(12,34,60,.95), rgba(5,12,29,.95));
+  font: bold .95rem "Courier New", monospace;
+  letter-spacing: .08em;
+  padding: 11px 24px;
+  cursor: pointer;
+  transition: transform .18s ease, color .18s ease, background .18s ease, box-shadow .18s ease;
+}
+
+.action-button:not(:disabled) { animation: buttonPulse 2.4s ease-in-out infinite; }
+
+.action-button:hover:not(:disabled), .control-button:hover {
+  color: #041018;
+  background: var(--cyan);
+  box-shadow: 0 0 18px rgba(83,255,225,.55);
+  transform: translateY(-2px);
+}
+
+.action-button:active:not(:disabled), .control-button:active { transform: scale(.96); }
+
+.action-button:disabled {
+  opacity: .38;
+  cursor: not-allowed;
+  animation: none;
+}
+
+.secondary-button { border-color: var(--blue); color: var(--blue); }
+.secondary-button:hover:not(:disabled) { background: var(--blue); color: #06101e; }
+
+.instructions, .mission-note {
+  margin: 13px 0 0;
+  color: #dceaff;
+  font-size: .85rem;
+  line-height: 1.5;
+}
+
+.mission-note {
+  color: #9db3d8;
+  font-family: Arial, sans-serif;
+  font-size: .82rem;
+}
+
+.touch-controls {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  margin-top: 14px;
+}
+
+.control-button {
+  min-width: 58px;
+  min-height: 48px;
+  padding: 8px 16px;
+  touch-action: none;
+  user-select: none;
+}
+
+.fire-button { min-width: 90px; border-color: var(--pink); color: var(--pink); }
+.fire-button:hover { background: var(--pink); color: #190612; }
+
+.page-footer {
+  margin-top: 18px;
+  color: #7188b3;
+  font-size: .68rem;
+  letter-spacing: .16em;
+}
+
+@keyframes starDrift {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(110px, 75px, 0); }
+}
+@keyframes scan { from { transform: translateY(-8px); } to { transform: translateY(8px); } }
+@keyframes titleGlow {
+  from { text-shadow: 0 0 7px rgba(83,255,225,.65), 0 0 18px rgba(83,255,225,.2); }
+  to { text-shadow: 0 0 12px rgba(83,255,225,1), 0 0 34px rgba(83,255,225,.5); }
+}
+@keyframes buttonPulse {
+  0%, 100% { box-shadow: 0 0 0 rgba(83,255,225,0); }
+  50% { box-shadow: 0 0 13px rgba(83,255,225,.22); }
+}
+
+@media (max-width: 650px) {
+  body { padding: 18px 10px; }
+  .site-header { margin-bottom: 14px; }
+  .eyebrow { font-size: .62rem; letter-spacing: .12em; }
+  .intro { font-size: .9rem; }
+  .game-panel { padding: 12px 9px; border-radius: 12px; }
+  .touch-controls { display: flex; }
+  .instructions { font-size: .76rem; }
+  .page-footer { font-size: .58rem; line-height: 1.6; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
