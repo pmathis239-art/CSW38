@@ -1,49 +1,139 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#050817">
+
   <title>Space Defender | Phillip Mathis</title>
+
   <link rel="stylesheet" href="SpaceDefender.css">
   <script src="SpaceDefender.js" defer></script>
 </head>
+
 <body>
   <main class="page-shell">
+
     <header class="site-header">
-      <p class="eyebrow">DEEP SPACE DEFENSE SYSTEM // SECTOR 07</p>
+      <p class="eyebrow">
+        DEEP SPACE DEFENSE SYSTEM // SECTOR 07
+      </p>
+
       <h1>SPACE DEFENDER</h1>
-      <p class="author">Created by <strong>Phillip Mathis</strong></p>
-      <p class="intro">Earth's outer defense line is under attack. Pilot your starfighter, take aim, and clear every incoming wave before the invaders reach your position.</p>
+
+      <p class="author">
+        Created by <strong>Phillip Mathis</strong>
+      </p>
+
+      <p class="intro">
+        Earth's outer defense line is under attack.
+        Pilot your starfighter, take aim, and clear every
+        incoming wave before the invaders reach your position.
+      </p>
     </header>
 
     <section class="game-panel" aria-label="Space Defender game">
+
       <div class="status-bar">
-        <div class="status-item">SCORE <span id="score">0</span></div>
-        <div class="status-item">LIVES <span id="lives">3</span></div>
-        <div class="status-item">MISSION <span id="missionStatus">IN PROGRESS</span></div>
+        <div class="status-item">
+          SCORE <span id="score">0</span>
+        </div>
+
+        <div class="status-item">
+          LIVES <span id="lives">3</span>
+        </div>
+
+        <div class="status-item">
+          MISSION <span id="missionStatus">IN PROGRESS</span>
+        </div>
       </div>
 
-      <canvas id="gameCanvas" width="540" height="400" aria-label="Space Defender game area">
+      <canvas
+        id="gameCanvas"
+        width="540"
+        height="400"
+        aria-label="Space Defender game area">
+
         Your browser does not support the HTML canvas element.
+
       </canvas>
 
       <div class="game-actions">
-        <button id="playAgain" class="action-button" type="button" disabled>PLAY AGAIN</button>
-        <button id="musicToggle" class="action-button secondary-button" type="button" aria-pressed="false">♫ MUSIC: OFF</button>
+
+        <button
+          id="playAgain"
+          class="action-button"
+          type="button"
+          disabled>
+          PLAY AGAIN
+        </button>
+
+        <button
+          id="musicToggle"
+          class="action-button secondary-button"
+          type="button"
+          aria-pressed="false">
+          ♫ RETRO MUSIC: OFF
+        </button>
+
       </div>
 
       <div class="touch-controls" aria-label="Touch game controls">
-        <button class="control-button" id="moveLeft" type="button" aria-label="Move left">◀</button>
-        <button class="control-button fire-button" id="fire" type="button" aria-label="Fire">FIRE</button>
-        <button class="control-button" id="moveRight" type="button" aria-label="Move right">▶</button>
+
+        <button
+          class="control-button"
+          id="moveLeft"
+          type="button"
+          aria-label="Move left">
+          ◀
+        </button>
+
+        <button
+          class="control-button fire-button"
+          id="fire"
+          type="button"
+          aria-label="Fire">
+          FIRE
+        </button>
+
+        <button
+          class="control-button"
+          id="moveRight"
+          type="button"
+          aria-label="Move right">
+          ▶
+        </button>
+
       </div>
 
-      <p class="instructions"><strong>KEYBOARD:</strong> ← / → move &nbsp;·&nbsp; SPACE fires torpedoes</p>
-      <p class="mission-note">MISSION BRIEFING: Destroy the gold enemy ships and protect the defense grid.</p>
+      <p class="instructions">
+        <strong>KEYBOARD:</strong>
+        ← / → move &nbsp;·&nbsp; SPACE fires torpedoes
+      </p>
+
+      <p class="mission-note">
+        You begin with 3 lives. Each invader that reaches
+        the defense line costs 1 life. Clear a wave to face
+        a faster one.
+      </p>
+
+      <p class="mission-note">
+        MISSION BRIEFING: Destroy the gold enemy ships
+        and protect the defense grid.
+      </p>
+
+      <p class="mission-note">
+        SOUNDTRACK: Futuristic retro-arcade electronic music.
+        Use the music button to toggle the soundtrack.
+      </p>
+
     </section>
 
-    <footer class="page-footer">STAY ALERT, PILOT. THE GALAXY IS COUNTING ON YOU.</footer>
+    <footer class="page-footer">
+      STAY ALERT, PILOT. THE GALAXY IS COUNTING ON YOU.
+    </footer>
+
   </main>
 </body>
 </html>
